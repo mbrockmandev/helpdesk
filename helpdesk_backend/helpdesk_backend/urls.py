@@ -15,11 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from helpdesk.views import ticket_list, new_ticket, login
+from helpdesk.views import (
+    ticket_list,
+    new_ticket,
+    MyLoginView,
+    ticket_detail,
+    delete_ticket,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("tickets/", ticket_list, name="ticket_list"),
     path("new_ticket/", new_ticket, name="new_ticket"),
-    path("login/", login, name="login"),
+    path("accounts/login/", MyLoginView.as_view(), name="login"),
+    path("tickets/<int:ticket_id>/", ticket_detail, name="ticket_detail"),
+    path("tickets/<int:ticket_id>/delete/", delete_ticket, name="delete_ticket"),
 ]

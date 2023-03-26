@@ -3,6 +3,7 @@
 <ul>
   {% for ticket in tickets %}
   <li>{{ ticket.title }}</li>
+  <a href="{% url 'ticket_detail' ticket_id=ticket.id %}">View Ticket</a>
   {% empty %}
   <li>No tickets found.</li>
   {% endfor %}

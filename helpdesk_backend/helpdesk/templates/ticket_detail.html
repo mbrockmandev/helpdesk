@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{ ticket.title }}</h1>
+<p><strong>Status:</strong> {{ ticket.status }}</p>
+<p><strong>Assigned to:</strong> {{ ticket.assigned_to }}</p>
+<p><strong>Description:</strong> {{ ticket.description }}</p>
+<p><strong>Created:</strong> {{ ticket.created_at }}</p>
+<p><strong>Last updated:</strong> {{ ticket.updated_at }}</p>
+<form
+  method="post"
+  action="{% url 'delete_ticket' ticket.id %}">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>
+{% endblock %}

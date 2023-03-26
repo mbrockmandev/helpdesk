@@ -29,6 +29,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+AUTH_USER_MODEL = "auth.User"  # or 'auth.User' for the built-in User model
+LOGIN_REDIRECT_URL = "ticket_list"
+
 
 # Application definition
 
