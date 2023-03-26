@@ -15,8 +15,24 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+OVERALL_BASE_DIR = Path(__file__).resolve().parent.parent.parent
+print(OVERALL_BASE_DIR)
+
+BUILD_DIR = os.path.join(OVERALL_BASE_DIR, "helpdesk_frontend", "build")
+print(BUILD_DIR)
+
+TESTFE_DIR = os.path.join(OVERALL_BASE_DIR, "helpdesk_frontend", "public")
+
+STATICFILES_DIRS = [BASE_DIR / "helpdesk_frontend" / "build" / "static"]
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -50,6 +66,7 @@ INSTALLED_APPS = [
     "helpdesk",
 ]
 
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -62,12 +79,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "helpdesk_backend.urls"
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "helpdesk", "templates")],
+        "DIRS": [
+            # django templates
+            os.path.join(BASE_DIR, "helpdesk", "templates"),
+            # react build files
+            # os.path.join(OVERALL_BASE_DIR, "helpdesk_frontend", "build"),
+            TESTFE_DIR,
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
